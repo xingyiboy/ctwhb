@@ -1,0 +1,158 @@
+{
+  "pages": [{
+      "path": "pages/login",
+      "style": {
+        "navigationBarTitleText": "登录"
+      }
+    }, {
+      "path": "pages/index",
+      "style": {
+        "navigationBarTitleText": "首页"
+      }
+    }, {
+      "path": "pages/news/detail",
+      "style": {
+        "navigationBarTitleText": "新闻资讯详情"
+      }
+    },
+    {
+      "path": "pages/history-record/index",
+      "style": {
+        "navigationBarTitleText": "历史记录"
+      }
+    },
+    {
+      "path": "pages/collect/index",
+      "style": {
+        "navigationBarTitleText": "收藏"
+      }
+    }, {
+      "path": "pages/forum/detail",
+      "style": {
+        "navigationBarTitleText": "论坛详情"
+      }
+    }, {
+      "path": "pages/forum/add",
+      "style": {
+        "navigationBarTitleText": "新增论坛"
+      }
+    }, {
+      "path": "pages/education/detail",
+      "style": {
+        "navigationBarTitleText": "教育详情"
+      }
+    }, {
+      "path": "pages/work/index",
+      "style": {
+        "navigationBarTitleText": "工作台"
+      }
+    }, {
+      "path": "pages/mine/index",
+      "style": {
+        "navigationBarTitleText": "我的"
+      }
+    }, {
+      "path": "pages/mine/avatar/index",
+      "style": {
+        "navigationBarTitleText": "修改头像"
+      }
+    }, {
+      "path": "pages/mine/info/index",
+      "style": {
+        "navigationBarTitleText": "个人信息"
+      }
+    }, {
+      "path": "pages/mine/info/edit",
+      "style": {
+        "navigationBarTitleText": "编辑资料"
+      }
+    }, {
+      "path": "pages/mine/pwd/index",
+      "style": {
+        "navigationBarTitleText": "修改密码"
+      }
+    }, {
+      "path": "pages/mine/setting/index",
+      "style": {
+        "navigationBarTitleText": "应用设置"
+      }
+    }, {
+      "path": "pages/mine/help/index",
+      "style": {
+        "navigationBarTitleText": "常见问题"
+      }
+    }, {
+      "path": "pages/mine/about/index",
+      "style": {
+        "navigationBarTitleText": "关于我们"
+      }
+    }, {
+      "path": "pages/common/webview/index",
+      "style": {
+        "navigationBarTitleText": "浏览网页"
+      }
+    }, {
+      "path": "pages/common/textview/index",
+      "style": {
+        "navigationBarTitleText": "浏览文本"
+      }
+    }, {
+      "path": "pages/history",
+      "style": {
+        "navigationBarTitleText": "历史"
+      }
+    }, {
+      "path": "pages/history/detail",
+      "style": {
+        "navigationBarTitleText": "详情"
+      }
+    }, {
+      "path": "pages/education",
+      "style": {
+        "navigationBarTitleText": "教育"
+      }
+    }, {
+      "path": "pages/forum",
+      "style": {
+        "navigationBarTitleText": "论坛"
+      }
+    }
+  ],
+  "tabBar": {
+    "color": "#000000",
+    "selectedColor": "#000000",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "list": [{
+      "pagePath": "pages/index",
+      "iconPath": "static/images/tabbar/home.png",
+      "selectedIconPath": "static/images/tabbar/home_.png",
+      "text": "首页"
+    }, {
+      "pagePath": "pages/history",
+      "iconPath": "static/images/tabbar/history.png",
+      "selectedIconPath": "static/images/tabbar/history_.png",
+      "text": "历史"
+    }, {
+      "pagePath": "pages/forum",
+      "iconPath": "static/images/tabbar/forum.png",
+      "selectedIconPath": "static/images/tabbar/forum_.png",
+      "text": "论坛"
+    }, {
+      "pagePath": "pages/education",
+      "iconPath": "static/images/tabbar/work.png",
+      "selectedIconPath": "static/images/tabbar/work_.png",
+      "text": "教育"
+    }, {
+      "pagePath": "pages/mine/index",
+      "iconPath": "static/images/tabbar/mine.png",
+      "selectedIconPath": "static/images/tabbar/mine_.png",
+      "text": "我的"
+    }]
+  },
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "RuoYi",
+    "navigationBarBackgroundColor": "#FFFFFF"
+  }
+}
