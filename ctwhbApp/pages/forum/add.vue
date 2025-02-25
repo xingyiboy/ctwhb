@@ -18,7 +18,7 @@
 
       <!-- 内容 -->
       <uni-forms-item name="content" label="内容：">
-        <editor id="editor" class="editor" @ready="onEditorReady" @input="onEditorInput"></editor>
+        <rich-text-editor v-model="formData.content" placeholder="请输入内容描述" />
       </uni-forms-item>
 
       <!-- 首页图片 -->
@@ -47,6 +47,7 @@
 
 <script>
 import { uploadFile, createForum, getDictDataListByType } from '@/api/ctwhb';
+import RichTextEditor from '@/components/rich-text-editor/index.vue';
 
 export default {
   data() {
@@ -106,6 +107,9 @@ export default {
   },
   onLoad() {
     this.loadCategories();
+  },
+  components: {
+    RichTextEditor
   },
   methods: {
     async loadCategories() {

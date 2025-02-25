@@ -7,11 +7,8 @@
           <view v-if="!avatar" class="cu-avatar xl round">
             <view class="iconfont icon-people"></view>
           </view>
-          <image v-if="avatar" @click="handleToAvatar" :src="avatar" class="cu-avatar xl round" mode="aspectFill">
-          </image>
-          <view v-if="!name" @click="handleToLogin" class="login-tip">
-            点击登录
-          </view>
+          <image v-if="avatar" @click="handleToAvatar" :src="avatar" class="cu-avatar xl round" mode="aspectFill"></image>
+          <view v-if="!name" @click="handleToLogin" class="login-tip">点击登录</view>
           <view v-if="name" @click="handleToInfo" class="user-info">
             <view class="username">{{ name }}</view>
           </view>
@@ -76,24 +73,24 @@
 </template>
 
 <script>
-import storage from '@/utils/storage'
+import storage from '@/utils/storage';
 
 export default {
   data() {
     return {
       version: getApp().globalData.config.appInfo.version,
       windowHeight: uni.getSystemInfoSync().windowHeight
-    }
+    };
   },
   computed: {
     name() {
-      return this.$store.state.user.name
+      return this.$store.state.user.name;
     },
     avatar() {
-      return this.$store.state.user.avatar
+      return this.$store.state.user.avatar;
     },
     windowHeight() {
-      return uni.getSystemInfoSync().windowHeight - 50
+      return uni.getSystemInfoSync().windowHeight - 50;
     }
   },
   methods: {
@@ -107,48 +104,48 @@ export default {
       this.$modal.showToast('模块建设中~');
     },
     handleLogout() {
-      this.$modal.confirm('确定注销并退出系统吗？').then(() => {
+      this.$modal.confirm('确定退出系统吗？').then(() => {
         this.$store.dispatch('LogOut').then(() => {
           this.$tab.reLaunch('/pages/index');
         });
       });
     },
     handleToInfo() {
-      this.$tab.navigateTo('/pages/mine/info/index')
+      this.$tab.navigateTo('/pages/mine/info/index');
     },
     handleToEditInfo() {
-      this.$tab.navigateTo('/pages/mine/info/edit')
+      this.$tab.navigateTo('/pages/mine/info/edit');
     },
     handleToSetting() {
-      this.$tab.navigateTo('/pages/history-record/index')
+      this.$tab.navigateTo('/pages/history-record/index');
     },
     handleToLogin() {
-      this.$tab.reLaunch('/pages/login')
+      this.$tab.reLaunch('/pages/login');
     },
     handleToAvatar() {
-      this.$tab.navigateTo('/pages/mine/avatar/index')
+      this.$tab.navigateTo('/pages/mine/avatar/index');
     },
     handleLogout() {
       this.$modal.confirm('确定注销并退出系统吗？').then(() => {
         this.$store.dispatch('LogOut').then(() => {
-          this.$tab.reLaunch('/pages/index')
-        })
-      })
+          this.$tab.reLaunch('/pages/index');
+        });
+      });
     },
     handleHelp() {
-      this.$tab.navigateTo('/pages/mine/help/index')
+      this.$tab.navigateTo('/pages/mine/help/index');
     },
     handleAbout() {
-      this.$tab.navigateTo('/pages/collect/index')
+      this.$tab.navigateTo('/pages/collect/index');
     },
     handleJiaoLiuQun() {
-      this.$modal.showToast('微信搜索 naidaguo 后，添加好友后拉你进技术交流群')
+      this.$modal.showToast('微信搜索 naidaguo 后，添加好友后拉你进技术交流群');
     },
     handleBuilding() {
-      this.$modal.showToast('模块建设中~')
+      this.$modal.showToast('模块建设中~');
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -156,9 +153,11 @@ export default {
   background-color: #f5f7fa;
 
   .header-section {
+    margin: 30rpx 30rpx 0;
     padding: 40rpx 30rpx 60rpx;
     background: linear-gradient(135deg, #3b7cff, #6698ff);
-    border-radius: 0 0 30rpx 30rpx;
+    border-radius: 24rpx;
+    box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.05);
 
     .header-content {
       display: flex;

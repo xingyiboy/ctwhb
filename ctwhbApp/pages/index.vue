@@ -9,14 +9,17 @@
       </view>
     </view>
     <!-- 轮播图 (搜索时隐藏) -->
-    <swiper v-if="!isSearching" class="swiper" circular :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
-      <swiper-item v-for="(item, index) in swiperList" :key="index" @click="handleSwiperClick(item)" class="swiper-item">
+    <swiper v-if="!isSearching" class="swiper" circular :indicator-dots="true" :autoplay="true" :interval="3000"
+      :duration="1000">
+      <swiper-item v-for="(item, index) in swiperList" :key="index" @click="handleSwiperClick(item)"
+        class="swiper-item">
         <image :src="item.picture" mode="aspectFill"></image>
       </swiper-item>
     </swiper>
 
     <!-- 内容区域（添加下拉刷新） -->
-    <scroll-view scroll-y="true" class="scroll-content" refresher-enabled="true" :refresher-triggered="isRefreshing" @refresherrefresh="onRefresh" @scrolltolower="onLoadMore">
+    <scroll-view scroll-y="true" class="scroll-content" refresher-enabled="true" :refresher-triggered="isRefreshing"
+      @refresherrefresh="onRefresh" @scrolltolower="onLoadMore">
       <!-- 新闻资讯 -->
       <view class="news-section">
         <view class="section-title" v-if="!isSearching">
@@ -29,11 +32,12 @@
         </view>
 
         <view class="news-list">
-          <view class="news-item" v-for="(item, index) in newsList" :key="index" @click="goToNewsDetail(item)">
+          <view class="news-item" v-for="(item, index) in searchResults" :key="index" @click="goToDetail(item)">
             <image :src="item.picture" mode="aspectFill" class="news-image"></image>
             <view class="news-info">
               <text class="news-title">{{ item.title }}</text>
               <view class="news-bottom">
+                <text class="news-type">{{ item.type === 'news' ? '文化资讯' : '教育视频' }}</text>
                 <text class="news-time">{{ formatDate(item.createTime) }}</text>
                 <text class="news-views">{{ item.view }}阅读</text>
               </view>
@@ -42,13 +46,13 @@
         </view>
 
         <!-- 加载更多状态 -->
-        <view class="load-more" v-if="newsList.length > 0">
+        <view class="load-more" v-if="searchResults.length > 0">
           <text v-if="hasMore">上拉加载更多</text>
           <text v-else>没有更多数据了</text>
         </view>
 
         <!-- 无搜索结果提示 -->
-        <view v-if="isSearching && newsList.length === 0" class="no-result">
+        <view v-if="isSearching && searchResults.length === 0" class="no-result">
           <image src="/static/images/no-result.png" mode="aspectFit"></image>
           <text>暂无相关内容</text>
         </view>
@@ -59,13 +63,14 @@
 
 <script>
 import { getSlideshowPage, getNewsPage } from '@/api/ctwhb';
+import { getEducationPage } from '@/api/education';
 
 export default {
   data() {
     return {
       searchKey: '',
       swiperList: [],
-      newsList: [],
+      searchResults: [],
       isSearching: false,
       isRefreshing: false,
       // 分页参数
@@ -105,23 +110,45 @@ export default {
           ...this.queryParams,
           title: this.searchKey
         };
-        const newsRes = await getNewsPage(params);
+
+        // 并行请求新闻和教育视频
+        const [newsRes, eduRes] = await Promise.all([
+          getNewsPage(params),
+          getEducationPage(params)
+        ]);
+
+        // 处理新闻数据，添加类型标识
+        const newsData = newsRes.data.list.map(item => ({
+          ...item,
+          type: 'news'
+        }));
+
+        // 处理教育视频数据，添加类型标识
+        const eduData = eduRes.data.list.map(item => ({
+          ...item,
+          type: 'education'
+        }));
+
+        // 合并数据并按创建时间排序
+        const combinedData = [...newsData, ...eduData].sort((a, b) =>
+          new Date(b.createTime) - new Date(a.createTime)
+        );
 
         // 更新总数
-        this.total = newsRes.data.total;
+        this.total = newsRes.data.total + eduRes.data.total;
 
         // 判断是否还有更多数据
         this.hasMore = this.queryParams.pageNo * this.queryParams.pageSize < this.total;
 
         // 处理数据列表
         if (isLoadMore) {
-          this.newsList = [...this.newsList, ...newsRes.data.list];
+          this.searchResults = [...this.searchResults, ...combinedData];
         } else {
-          this.newsList = newsRes.data.list;
+          this.searchResults = combinedData;
         }
       } catch (error) {
         uni.showToast({
-          title: '获取新闻列表失败',
+          title: '获取数据失败',
           icon: 'none'
         });
       }
@@ -164,11 +191,17 @@ export default {
         url: `/pages/news/detail?id=${item.id}`
       });
     },
-    goToNewsDetail(item) {
-      // 跳转到新闻详情
-      uni.navigateTo({
-        url: `/pages/news/detail?id=${item.id}`
-      });
+    goToDetail(item) {
+      // 根据类型跳转到不同页面
+      if (item.type === 'news') {
+        uni.navigateTo({
+          url: `/pages/news/detail?id=${item.id}`
+        });
+      } else {
+        uni.navigateTo({
+          url: `/pages/education/detail?id=${item.id}`
+        });
+      }
     },
     goToNewsList() {
       // 跳转到新闻列表
@@ -327,9 +360,17 @@ export default {
 
 .news-bottom {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-top: 10rpx;
+  gap: 15rpx;
+}
+
+.news-type {
+  font-size: 24rpx;
+  color: #4d7fff;
+  background-color: rgba(77, 127, 255, 0.1);
+  padding: 4rpx 12rpx;
+  border-radius: 20rpx;
+  margin-right: 10rpx;
 }
 
 .news-time,

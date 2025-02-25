@@ -14,10 +14,9 @@
 
       <view class="post-main">
         <view class="title">{{ detail.title }}</view>
-        <rich-text :nodes="detail.content" class="content"></rich-text>
+        <mp-html :content="detail.content" />
         <view class="images" v-if="detail.images">
-          <image v-for="(img, index) in detail.images.split(',')" :key="index" :src="img" mode="widthFix"
-            @click="previewImage(img, detail.images.split(','))"></image>
+          <image v-for="(img, index) in detail.images.split(',')" :key="index" :src="img" mode="widthFix" @click="previewImage(img, detail.images.split(','))"></image>
         </view>
       </view>
 
@@ -28,9 +27,8 @@
             <text>{{ detail.view || 0 }}</text>
           </view>
           <view class="action-item" @click="handleLike">
-            <uni-icons :type="isLiked ? 'heart-filled' : 'heart'" size="20"
-              :color="isLiked ? '#ff4d4f' : '#8a9ab0'"></uni-icons>
-            <text :class="{ 'liked': isLiked }">{{ detail.likes || 0 }}</text>
+            <uni-icons :type="isLiked ? 'heart-filled' : 'heart'" size="20" :color="isLiked ? '#ff4d4f' : '#8a9ab0'"></uni-icons>
+            <text :class="{ liked: isLiked }">{{ detail.likes || 0 }}</text>
           </view>
           <view class="action-item">
             <uni-icons type="chat" size="20" color="#8a9ab0"></uni-icons>
@@ -59,10 +57,8 @@
 
     <!-- 评论输入框 -->
     <view class="comment-input">
-      <input type="text" v-model="commentText" placeholder="说点什么..." placeholder-style="color: #8a9ab0;"
-        @confirm="submitComment" />
-      <button @click="submitComment" :disabled="!commentText.trim()"
-        :class="{ 'active': commentText.trim() }">发送</button>
+      <input type="text" v-model="commentText" placeholder="说点什么..." placeholder-style="color: #8a9ab0;" @confirm="submitComment" />
+      <button @click="submitComment" :disabled="!commentText.trim()" :class="{ active: commentText.trim() }">发送</button>
     </view>
   </view>
 </template>
@@ -126,7 +122,7 @@ export default {
         });
         // 更新点赞状态和数量
         this.isLiked = !this.isLiked;
-        await this.loadDetail();
+        this.detail.likes += this.isLiked ? 1 : -1;
 
         uni.showToast({
           title: this.isLiked ? '点赞成功' : '取消点赞成功',

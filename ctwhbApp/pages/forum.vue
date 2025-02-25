@@ -360,6 +360,17 @@ export default {
   text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 0.1);
 }
 
+.empty-tip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .empty-tip image {
   width: 200rpx;
   height: 200rpx;

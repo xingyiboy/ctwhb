@@ -1,7 +1,8 @@
 <template>
   <view class="education-container">
     <!-- 视频列表 -->
-    <scroll-view scroll-y class="video-list" @scrolltolower="loadMore" refresher-enabled :refresher-triggered="isRefreshing" @refresherrefresh="refresh">
+    <scroll-view scroll-y class="video-list" @scrolltolower="loadMore" refresher-enabled
+      :refresher-triggered="isRefreshing" @refresherrefresh="refresh">
       <view class="video-grid">
         <view class="video-item" v-for="(item, index) in videoList" :key="index" @click="goToDetail(item.id)">
           <!-- 视频封面 -->

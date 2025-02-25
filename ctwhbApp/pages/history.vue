@@ -5,32 +5,28 @@
     <!-- 地图区域 -->
     <view class="map-container">
       <!-- 底图 -->
-      <image src="http://43.139.211.116:9000/financinglink/c982e28a0d28a12bbb32d76c98ad480376b829b4f744deabacaf3bb14e879eae.jpg" mode="aspectFit" class="base-map"></image>
+      <image
+        src="http://43.139.211.116:9000/financinglink/c982e28a0d28a12bbb32d76c98ad480376b829b4f744deabacaf3bb14e879eae.jpg"
+        mode="aspectFit" class="base-map"></image>
 
       <!-- 模块图层 -->
       <div class="modules-layer-hangzhou">
         <div class="clickable-area hangzhou-area" @click="showCityInfo('杭州')"></div>
-        <img
-          :class="['modules-map', { active: activeCity == '杭州' }]"
+        <img :class="['modules-map', { active: activeCity == '杭州' }]"
           src="http://43.139.211.116:9000/financinglink/dbe9d761bb21395a1bf361da4cb679ac664bdb5b5151858e333372c837c0a79a.png"
-          usemap="#moduleMap"
-        />
+          usemap="#moduleMap" />
       </div>
       <div class="modules-layer-wenzhou">
         <div class="clickable-area wenzhou-area" @click="showCityInfo('温州')"></div>
-        <img
-          :class="['modules-map', { active: activeCity == '温州' }]"
+        <img :class="['modules-map', { active: activeCity == '温州' }]"
           src="http://43.139.211.116:9000/financinglink/d58fbfd5cd0722280fde286a398636a09ce6e717921074d7fe66f99a42ea2fbb.png"
-          usemap="#moduleMap"
-        />
+          usemap="#moduleMap" />
       </div>
       <div class="modules-layer-ningbo">
         <div class="clickable-area ningbo-area" @click="showCityInfo('宁波')"></div>
-        <img
-          :class="['modules-map', { active: activeCity == '宁波' }]"
+        <img :class="['modules-map', { active: activeCity == '宁波' }]"
           src="http://43.139.211.116:9000/financinglink/f80e41280c87eb1a2c67ba871abb58cda405fc1ee8e1c309b2c0aa99a9b61948.png"
-          usemap="#moduleMap"
-        />
+          usemap="#moduleMap" />
       </div>
     </view>
 
@@ -163,6 +159,7 @@ export default {
   height: 100%;
   pointer-events: none;
 }
+
 .modules-layer-ningbo {
   position: absolute;
   top: 34rpx;
@@ -270,55 +267,77 @@ export default {
 }
 
 .modules-map.active {
-  opacity: 1; /* 激活状态完全不透明 */
-  transform: scale(1.01); /* 略微放大 */
-  filter: drop-shadow(0 0 10rpx rgba(0, 0, 255, 1)); /* 添加阴影效果 */
-  z-index: 1; /* 确保激活的图片在最上层 */
+  opacity: 1;
+  /* 激活状态完全不透明 */
+  transform: scale(1.01);
+  /* 略微放大 */
+  filter: drop-shadow(0 0 10rpx rgba(0, 0, 255, 1));
+  /* 添加阴影效果 */
+  z-index: 1;
+  /* 确保激活的图片在最上层 */
 }
+
 .clickable-area {
   position: absolute;
-  pointer-events: auto; /* 启用点击区域的点击事件 */
+  pointer-events: auto;
+  /* 启用点击区域的点击事件 */
   cursor: pointer;
-  z-index: 3; /* 设置为高的 z-index 值，使其在最顶层 */
+  z-index: 3;
+  /* 设置为高的 z-index 值，使其在最顶层 */
 }
 
 /* 为每个城市定义具体的可点击区域 */
 .hangzhou-area {
-  top: 170rpx; /* 这些值需要根据实际地图位置调整 */
+  top: 170rpx;
+  /* 这些值需要根据实际地图位置调整 */
   left: 180rpx;
   width: 100rpx;
   height: 250rpx;
-  transform: rotate(45deg); /* 旋转 45 度 */
+  transform: rotate(45deg);
+  /* 旋转 45 度 */
 }
 
 .wenzhou-area {
-  top: 470rpx; /* 这些值需要根据实际地图位置调整 */
+  top: 470rpx;
+  /* 这些值需要根据实际地图位置调整 */
   left: 300rpx;
   width: 100rpx;
   height: 200rpx;
-  transform: rotate(45deg); /* 旋转 45 度 */
+  transform: rotate(45deg);
+  /* 旋转 45 度 */
 }
 
 .ningbo-area {
-  top: 270rpx; /* 这些值需要根据实际地图位置调整 */
+  top: 270rpx;
+  /* 这些值需要根据实际地图位置调整 */
   left: 420rpx;
   width: 140rpx;
   height: 100rpx;
-  transform: rotate(45deg); /* 旋转 45 度 */
+  transform: rotate(45deg);
+  /* 旋转 45 度 */
 }
+
 .history-container {
-  z-index: 9999; /* 设置为高的 z-index 值，使其在最顶层 */
-  width: 100%;
-  height: 300rpx; /* 固定容器高度，可以根据需求调整 */
+  z-index: 9999;
+  width: 90%;
+  /* 设置为屏幕宽度的80% */
+  height: 60vh;
+  /* 设置为屏幕高度的60% */
   background: #ffffff;
   border-radius: 16rpx;
   box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.1);
-  margin: 20rpx;
+  position: fixed;
+  /* 固定定位 */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  /* 使用transform实现居中 */
 }
 
 .history-scroll {
   height: 100%;
   width: 100%;
+  /* 添加内边距 */
 }
 
 .history-list {
@@ -327,20 +346,26 @@ export default {
 
 .history-row {
   display: flex;
-  flex-direction: row; /* 确保横向排列 */
-  gap: 20rpx; /* 项目之间的间距 */
+  flex-direction: row;
+  /* 确保横向排列 */
+  gap: 20rpx;
+  /* 项目之间的间距 */
   margin-bottom: 20rpx;
 }
 
 .history-item {
-  z-index: 9999; /* 设置为高的 z-index 值，使其在最顶层 */
+  z-index: 9999;
+  /* 设置为高的 z-index 值，使其在最顶层 */
   flex: 1;
-  min-width: 300rpx; /* 设置最小宽度 */
+  min-width: 300rpx;
+  /* 设置最小宽度 */
   background-color: #d4e9ff;
   padding: 20rpx;
   border-radius: 8rpx;
-  text-align: center; /* 文字水平居中 */
-  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+  text-align: center;
+  /* 文字水平居中 */
+  box-shadow: 0 4rpx 8rpx rgba(0, 0, 0, 0.1);
+  /* 添加阴影效果 */
 }
 
 .history-title {
@@ -349,7 +374,8 @@ export default {
   line-height: 1.4;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2; /* 最多显示两行 */
+  -webkit-line-clamp: 2;
+  /* 最多显示两行 */
   overflow: hidden;
 }
 </style>

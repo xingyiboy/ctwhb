@@ -16,13 +16,11 @@
             <text>{{ detail.views || 0 }}次观看</text>
           </view>
           <view class="action-item" @click="handleLike">
-            <uni-icons :type="isLiked ? 'heart-filled' : 'heart'" size="14"
-              :color="isLiked ? '#ff4d4f' : '#999'"></uni-icons>
+            <uni-icons :type="isLiked ? 'heart-filled' : 'heart'" size="14" :color="isLiked ? '#ff4d4f' : '#999'"></uni-icons>
             <text>{{ detail.likes || 0 }}</text>
           </view>
           <view class="action-item" @click="handleCollect">
-            <uni-icons :type="isCollected ? 'star-filled' : 'star'" size="14"
-              :color="isCollected ? '#ffc107' : '#999'"></uni-icons>
+            <uni-icons :type="isCollected ? 'star-filled' : 'star'" size="14" :color="isCollected ? '#ffc107' : '#999'"></uni-icons>
             <text>收藏</text>
           </view>
           <view class="stat-item">
@@ -35,8 +33,7 @@
       <!-- 如果有多个视频，显示视频列表 -->
       <view class="video-list" v-if="videoList.length > 1">
         <view class="section-title">视频列表</view>
-        <view v-for="(video, index) in videoList" :key="index"
-          :class="['video-item', { active: currentVideo === video }]" @click="switchVideo(video)">
+        <view v-for="(video, index) in videoList" :key="index" :class="['video-item', { active: currentVideo === video }]" @click="switchVideo(video)">
           <uni-icons type="videocam" size="16"></uni-icons>
           <text>第{{ index + 1 }}集</text>
         </view>
@@ -140,8 +137,9 @@ export default {
           educationId: this.id,
           userId: userInfo.id
         });
+        // 更新点赞状态和数量
         this.isLiked = !this.isLiked;
-        await this.loadDetail();
+        this.detail.likes += this.isLiked ? 1 : -1;
 
         uni.showToast({
           title: this.isLiked ? '点赞成功' : '取消点赞成功',
