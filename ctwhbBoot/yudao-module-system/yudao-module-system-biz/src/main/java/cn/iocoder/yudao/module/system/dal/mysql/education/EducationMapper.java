@@ -21,7 +21,7 @@ public interface EducationMapper extends BaseMapperX<EducationDO> {
         return selectPage(reqVO, new LambdaQueryWrapperX<EducationDO>()
                 .betweenIfPresent(EducationDO::getCreateTime, reqVO.getCreateTime())
                 .eqIfPresent(EducationDO::getVidio, reqVO.getVidio())
-                .eqIfPresent(EducationDO::getTitle, reqVO.getTitle())
+                .likeIfPresent(EducationDO::getTitle, reqVO.getTitle())
                 .eqIfPresent(EducationDO::getPicture, reqVO.getPicture())
                 .eqIfPresent(EducationDO::getViews, reqVO.getViews())
                 .eqIfPresent(EducationDO::getComment, reqVO.getComment())

@@ -92,7 +92,7 @@ export default {
     formatDate(timestamp) {
       if (!timestamp) return '';
       const date = new Date(timestamp);
-      return `${date.getFullYear() + 1}年${date.getMonth() + 1}月${date.getDate()}日 ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
+      return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日 ${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
     }
   }
 };
