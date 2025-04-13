@@ -1,16 +1,17 @@
 # CTWHB 项目
 
 <div align="center">
-<h1>CTWHB 企业级文化介绍应用系统</h1>
+<h1>CTWHB 企业级文化介绍应用App</h1>
 </div>
 
 <div align="center">
-一个现代化的文化介绍企业级应用系统，采用前后端分离架构
+一个现代化的文化介绍企业级应用App，采用前后端分离架构
 </div>
+
 
 ## 📚 项目介绍
 
-CTWHB 是一个完整的企业级文化介绍应用系统，采用现代化的技术栈和架构设计。项目分为前端、后端和移动端三个主要部分，提供完整的企业级文化展示和管理解决方案。
+CTWHB 是一个完整的企业级文化介绍应用App，采用现代化的技术栈和架构设计。项目分为前端、后端和移动端三个主要部分，提供完整的企业级文化展示和管理解决方案。
 
 ## 📋 项目结构
 
@@ -103,23 +104,14 @@ ctwhbApp/
 - **核心框架**
 
   - Spring Boot 2.7.x
-  - Spring Security
-  - Spring Cloud Alibaba
   - MyBatis Plus
   - Lombok
-
+  
 - **数据库**
 
   - MySQL 5.7+
   - Redis 6.0+
   - Druid 连接池
-
-- **中间件**
-
-  - Nacos 服务注册与配置中心
-  - Gateway 网关
-  - Sentinel 流量控制
-  - Seata 分布式事务
 
 - **开发工具**
   - Maven 3.6+
@@ -132,9 +124,8 @@ ctwhbApp/
 
   - Vue 3
   - TypeScript 4.x
-  - Vite 3.x
   - Pinia 状态管理
-
+  
 - **UI 框架**
 
   - Element Plus
@@ -150,7 +141,6 @@ ctwhbApp/
   - StyleLint
 
 - **构建工具**
-  - Vite
   - Webpack
 
 ### 移动端技术栈
